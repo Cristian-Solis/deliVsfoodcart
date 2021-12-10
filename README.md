@@ -66,4 +66,4 @@ Maps!
     - Combined, food carts only, and delis only
 
 a lesson in data
-- too little leaves you feeling sad trying to make connections using minor leads like a conspriracy theorist.
+- too little leaves you feeling sad trying to make connections using minor leads like a conspiracy theorist.
