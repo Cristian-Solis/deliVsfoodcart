@@ -1,5 +1,6 @@
 """
 Name:  Cristian Solis
+Title: Deli Vs Food Cart
 Email: cristian.solis79@myhunter.cuny.edu
 Resources: https://geopy.readthedocs.io/en/stable/#nominatim,https://stackoverflow.com/questions/5807195/how-to-get-coordinates-of-address-from-python, https://www.geeksforgeeks.org/python-plotting-google-map-using-folium-package/?ref=lbp, https://stackoverflow.com/questions/11350770/filter-pandas-dataframe-by-substring-critera, https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html, https://stackoverflow.com/questions/20454120/how-to-remove-gaps-between-bars-in-matplotlib-bar-chart, program 15, program 25, Rahul, Dan and classmates reminding me of past assignments that may be useful for aggregating data
 URL: https://github.com/WhosDerpy/deliVsfoodcart
