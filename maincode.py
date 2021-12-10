@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import folium as fml
 
 # Functions that do what the dew could not do
+## finds coordinates from human directions/"locations" sometimes derps out and y'know that's what makes it special.
 def addressToCoords(df):
     leng = []
     long = []
@@ -23,15 +24,15 @@ def addressToCoords(df):
             long.append(location.longitude)
     return leng, long
 
+## manipulates the dataframe to only include Food Carts
 def cartSpecificDF(df):
     return df[(df['type_name'].str.contains('Food Cart'))|(df['type_name'].str.contains('Food Cart'))]
 
+## dataframe gets changed to only have keywords DELI or Deli in it.
 def deliSpecificDF(df):
     return df[(df['Store Name'].str.contains('DELI'))|(df['Store Name'].str.contains('Deli'))]
 
-def graf(df):
-    return df
-
+## Simple number crunching to figure out the total number of a given string.
 def computeLocationNum(df, cName, val):
     leCounter = df[cName].str.count(val)
     return leCounter.sum()
@@ -40,20 +41,20 @@ def computeLocationNum(df, cName, val):
 deliStartDf = pd.read_csv('Recognized_Shop_Healthy_Stores.csv')
 freshZone = pd.read_csv('DCP_nyc_freshzoning.csv')
 foodCarto = pd.read_json('DPR_Eateries_001.json', dtype=dict)
-foodCarto = pd.DataFrame(foodCarto)
+foodCarto = pd.DataFrame(foodCarto) # made into a dataframe after being made into a dictionary to make sure it doesn't combust
 
 # Manipulating said files
 ## deli files
 deliCoords = deliSpecificDF(deliStartDf)
-deliCoords.dropna(subset=['Latitude'], inplace=True)
-deliCoords.dropna(subset=['Longitude'], inplace=True)
-delilat = list(deliCoords['Latitude'])
-delilon = list(deliCoords['Longitude'])
+deliCoords.dropna(subset=['Latitude'], inplace=True) # removing the NaNs so that they don't mess with the plotting later on
+deliCoords.dropna(subset=['Longitude'], inplace=True) # making sure to remove EVERY NaN so that no errors pop up
+delilat = list(deliCoords['Latitude']) # made into list for simpler interation (for me)
+delilon = list(deliCoords['Longitude']) # same reason for it being made into a list, listed 1 line above.
 
 
 ## food cart files
 foodCarto = cartSpecificDF(foodCarto)
-cartCoordsLat, cartCoordsLon = addressToCoords(foodCarto)
+cartCoordsLat, cartCoordsLon = addressToCoords(foodCarto) # grabbing whatever coordinates we can grab given the .json file
 
 #Crunching numbers
 ## Deli
@@ -69,13 +70,13 @@ normalMapu = fml.Map(location = [40.777190, -73.969219])
 
 ## deli
 map_O_Deli = fml.Map(location = [40.777190, -73.969219])
-for i in range(0,len(delilat)):
+for i in range(0,len(delilat)): # plotting all points for delis in the city
     fml.Marker([delilat[i], delilon[i]], popup = ' Deli ').add_to(map_O_Deli)
     fml.Marker([delilat[i], delilon[i]], popup = ' Deli ').add_to(normalMapu)
 
 ## carts
 mpCarts = fml.Map(location = [40.777190, -73.969219])
-for i in range(0,len(cartCoordsLon)):
+for i in range(0,len(cartCoordsLon)): # going through the entire list to graphy the specific points of carts onto both the cart specific map and the main map
     fml.Marker([cartCoordsLat[i], cartCoordsLon[i]], popup = ' Food Cart ').add_to(mpCarts)
     fml.Marker([cartCoordsLat[i], cartCoordsLon[i]], popup = ' Food Cart ').add_to(normalMapu)
 
