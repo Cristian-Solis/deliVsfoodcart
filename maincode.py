@@ -10,7 +10,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import folium as fml
-import gmplot
 
 # Functions that do what the dew could not do
 def addressToCoords(df):
